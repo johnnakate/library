@@ -38,7 +38,8 @@ DEBUG = False
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 
-ALLOWED_HOSTS = [os.getenv('WEBSITE_ ALLOWED'), '127.0.0.1']
+ALLOWED_HOSTS = [os.getenv(
+    'WEBSITE_ ALLOWED'), 'https://2022-libtech-clara.azurewebsites.net', '127.0.0.1']
 
 
 # STATICFILES_DIRS = [
