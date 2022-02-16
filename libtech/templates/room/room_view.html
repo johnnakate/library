@@ -1,0 +1,327 @@
+{% load static %} 
+{% block headerinclude %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Favicons -->
+    <link href="{% static 'img/logo.png' %}" rel="icon">
+    <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+    <!-- BOOTSTRAP DATA TABLE -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+    <!-- bootstrap css --> 
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"> 
+    <link rel="stylesheet" href="{% static '/css/room_view.css' %}">
+
+    
+    <title>Libtech: Add Rooms</title> 
+</head>
+  {% endblock headerinclude %} 
+
+  {% block content %}
+  <body>
+<!--SIDE BAR-->
+<div class="sidebar">
+  <div class="logo-details">
+    <i class='bx bxl-c-plus-plus icon'></i>
+    <div class="logo_name">LibTechº</div>
+    <i class='bx bx-menu' id="btn" ></i>
+  </div>
+  <ul class="nav-list">
+    <li>
+      <i class='bx bx-search' ></i>
+      <input type="text" placeholder="Search...">
+      <span class="tooltip">Search</span>
+    </li>
+    <li>
+      <a data-scroll-nav="0" href="{% url 'admin-dashboard' %}">
+      <i class='bx bx-grid-alt'></i>
+      <span class="links_name" href="">Dashboard</span>
+      </a>
+      <span class="tooltip">Dashboard</span>
+    </li>
+
+    <li> 
+      <a data-scroll-nav="2" href="#">
+      <i class='bx bx-user-pin' ></i>
+      <span class="links_name">My Reservations</span>
+      </a>
+      <span class="tooltip">reservation</span>
+    </li>
+    <li>
+      <a data-scroll-nav="3" href="{% url 'profile' %}">
+      <i class='bx bx-user' ></i>
+      <span class="links_name">Profile</span>
+      </a>
+      <span class="tooltip">profile</span>
+    </li>
+    <li>
+      <a href="#">
+      <i class='bx bx-chat' ></i>
+      <span class="links_name">360</span>
+      </a>
+      <span class="tooltip">360</span>
+    </li>    
+    <li>
+      <a href="#">
+      <i class='bx bx-cog' ></i>
+      <span class="links_name">Settings</span>
+      </a>
+       <span class="tooltip">Settings</span>
+    </li>
+    <li class="profile">
+      <div class="profile-details">
+        <i class='bx bx-user' ></i>
+        <div class="name_job">
+        <div class="name">{{ user.username }}</div>
+        <div class="job">Administrator</div>
+        </div>
+      </div>
+      <a href="{% url 'logout' %}"><i class='bx bx-log-out' id="log_out" ></i></a>
+    
+    </li>
+  </ul>
+</div>
+<!--END OF SIDE BAR-->
+
+    <!--START OF HOME-SECTION-->
+    <section class="home-section">
+      <!--START OF CONTENT WRAPPER-->
+      <div class="content-wrapper">
+        <!--START OF DATASCROLL INDEX-0-->
+        <div data-scroll-index="0">
+          <!--START OF ROW_1-->
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                  <h3 class="font-weight-bold"><a href="{%url 'admin-dashboard' %}" style="color:black; 
+                    text-decoration: none;">Admin Dashboard</a></h3>
+                  <h6 class="font-weight-normal mb-0">
+                    Hello {{ user.username }} ! what do you want to do?
+                    <span class="text-primary">3 unread alerts!</span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!--END OF ROW_1-->
+
+          {% include 'base/topnav.html' %}
+    <!--START OF USER TABLE-->
+    <div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          <h5>Add New Rooms</h5>
+          <hr>
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form|crispy }}
+              {{ form2|crispy }}
+             
+              <input class="btn btn-success btn-block" type="submit" value="Add">
+            </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-title text-center"> Rooms </p>
+            <table class="table table-striped table-borderless mydatatable">
+              <thead>
+                  <tr>
+                      <th scope="col">Type</th>
+                      <th scope="col">Room Name</th>
+                      <th scope="col">Capacity</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Activity</th>
+                  </tr>
+                
+              </thead>
+              <tbody>
+                {% for room, room_type in zipped_data %}
+                  <tr>
+                      <td>{{ room.type }}</td>
+                      <td>{{ room.category }}</td>
+
+                    
+                      <td>{{ room_type.capacity }}</td>
+                      <td>{{ room_type.description }}</td>
+                      
+                      <td>
+                          <!-- <a class="btn btn-info btn-sm mr-2" data-toggle="modal" data-target="#myModalEdit" style="background-color: #09d69c;
+                          border: none;font-weight: 500;color: #fff;"
+                          >Edit</a>
+                          <a class="btn btn-danger btn-sm ml-2" data-toggle="modal" data-target="#myModalDelete" style="background-color: #612C81;
+                          border: none;font-weight: 500;color: #fff;"
+                              >Delete</a>
+                          -->
+                          <a href="{% url 'room-edit' room.id %}" class="btn btn-info btn-sm mr-2" style="background-color: #09d69c;
+                          border: none;font-weight: 500;color: #fff;"
+                          >Edit</a>
+                          <a href="{% url 'room-delete' room.id %}" class="btn btn-danger btn-sm ml-2" style="background-color: #612C81;
+                          border: none;font-weight: 500;color: #fff;"
+                              >Delete</a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Room Name</th>
+                    <th scope="col">Capacity</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Activity</th>
+                </tr>
+                </tfoot>
+            </table>
+            </div>
+            </div>
+            </div>
+    </div>
+          <!--END OF USER TABLE-->
+
+          
+          <!-- Edit Modal -->
+          <div class="modal" id="myModalEdit" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.8);">
+            <div class="modal-dialog">
+              <div class="modal-content">
+              
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Edit Room Record</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <div class="modal-body" style="text-align: left;">
+                  <form method="POST" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                 
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <a class="btn btn-secondary" href="{% url 'room-view' %}" style="margin-left: 250px;">Cancel</a>
+                 <input class="btn btn-info" type="submit" value="Confirm" style="background-color: #FF8C00; border-color: #FF8C00;">
+                </div>
+              
+              </div>
+            </div>
+          </form>
+          </div>
+
+        
+
+          <!-- Delete Modal -->
+          <div class="modal" id="myModalDelete" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.8);">
+            <div class="modal-dialog">
+              <div class="modal-content">
+              
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete Room Record</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                  <div class="modal-body" style="text-align: left;">
+                    <form method="POST">
+                      <div class="alert alert-danger" style="background-color: #ffdead;">
+                          <h4>Are you sure, you want to delete {{ item }}?</h4>
+                      </div>
+                      {% csrf_token %}
+                      <a class="btn btn-secondary btn-sm" href="{% url 'room-view' %}" style="margin-left: 250px;">Cancel</a>
+                      <input id="btnDelete" class="btn btn-danger btn-sm" type="submit" value="Confirm" style="background-color: #FF8C00; border-color: #FF8C00;">
+                  </form>
+                </div>
+                
+              </div>
+            </div>
+          
+      <!--END OF CONTENT WRAPPER-->
+      </div>
+    </section>
+    
+   
+    <!--END OF HOME-SECTION-->
+  </body>
+</html>
+
+
+{% endblock content %} 
+{% block footerinclude %}
+<!-- DATA TABLES -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+<!-- plugins:js -->
+<script src="{% static 'js/vendor.bundle.base.js' %}"></script>
+<!-- Plugin js for this page -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'js/dataTables.select.min.js' %}"></script>
+
+<!-- End plugin js for this page -->
+<!-- ScrollIt js -->
+<script src="{% static 'js/scrollIt.min.js' %}"></script>
+
+<!-- inject:js -->
+<script src="{% static 'js/off-canvas.js' %}"></script>
+<script src="{% static 'js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'js/template.js' %}"></script>
+<script src="{% static 'js/settings.js' %}"></script>
+<script src="{% static 'js/todolist.js' %}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/admin-dashboard.js' %}"></script>
+<script src="{% static 'js/Chart.roundedBarCharts.js' %}"></script>
+<!-- End custom js for this page-->
+
+<!-- modal -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- for data table  -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+<script>
+  $('.mydatatable').DataTable({
+    order: [[3, 'desc']],
+    pagingType: 'full_numbers',
+    lengthMenu:[[5,10,25,50,-1],[5,10,25,50,"All"]],
+  });
+</script>
+
+<!-- <script>
+  $('#btn').on('click', function () {
+    $('#exampleModal').modal('show');
+});
+</script> -->
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/boostrap.bundle.min.js"
+integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//E1J19smozuHV6z3Iehds+3U1b9Bn9P1x0x4"
+crossorigin="anonymous"></script> -->
+
+{% endblock footerinclude %}

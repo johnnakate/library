@@ -1,0 +1,59 @@
+{% load static %}
+<div class="row">
+            <div class="col-md-6 grid-margin transparent">
+              <div class="row">
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-tale">
+                    <a class="text-decoration-none text-dark" href="{% url 'room-view' %}">
+                    <div class="card-body">
+                      <p class="mb-4" style="color:white;">Create Rooms</p>
+                      <p class="fs-30 mb-2" style="color:white;">{{ rooms_count }}</p>
+                      <p style="color:white;">10.00% (30 days)</p>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-dark-blue">
+                    <a class="text-decoration-none text-dark" href="{% url 'seat-view' %}">
+                    <div class="card-body">
+                      <p class="mb-4" style="color:white;">Create Seating</p>
+                      <p class="fs-30 mb-2" style="color:white;">{{ seats_count }}</p>
+                      <p style="color:white;">22.00% (30 days)</p>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="row">
+                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                  <div class="card card-light-blue">
+                  <a class="text-decoration-none text-dark" href="{% url 'reservation-view' %}">
+                    <div class="card-body">
+                      <p class="mb-4"style="color:white;" >Total Number of Reservations</p>
+                      <p class="fs-30 mb-2" style="color:white;">{{ reservations_count }}</p>
+                      <p style="color:white;">2.00% (30 days)</p>
+                    </div>
+                  </a>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-light-danger">
+                    <a class="text-decoration-none text-dark" href="{% url 'user-detail' %}">
+                    <div class="card-body">
+                      <p class="mb-4" style="color:white;">Total Number of Users</p>
+                      <p class="fs-30 mb-2" style="color:white;">{{ users_count }}</p>
+                      <p style="color:white;">22.00% (30 days)</p>
+                    </div>
+                  </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

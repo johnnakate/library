@@ -1,0 +1,124 @@
+{% load static %}
+{% block title %} Booking List {% endblock %}
+
+{% block content %}
+<body>
+    <div class="container" style="background-color: beige;">
+        <div class="row">
+         
+            
+
+        {% for reservation in reservation_list %}
+        <div class="col-3">
+    <div class="card my-4" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title mb-2">{{reservation.get_room_category}} Suite</h5>
+          <h6 class="card-subtitle mb-4 text-muted"> (Booking for Table No. {{booking.room.number}})</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Booking FROM</h6>
+          <p class="card-text">{{booking.start_time}}</p>
+          <h6 class="card-subtitle mb-2 text-muted">Booking TO</h6>
+          <p class="card-text">{{booking.end_time}}</p>
+          <a href="{{ booking.get_cancel_booking_url }}" class="card-link">Cancel Booking</a>
+          <a href="/booking/edit/{{booking.id}}" class="card-link">Edit Timings</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
+      {% endfor %}
+   
+
+    </div>
+</div>
+</body>
+
+<!-- <style>
+    *{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+body{
+    font-family: sans-serif;
+    background-color: rgb(46, 47, 48);
+    color: rgb(236, 235, 228);
+    line-height: 1.5;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    flex: 1;
+    display: flex;
+    flex-flow: row-reverse wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.headings{
+    flex:1.5;
+}
+.home{
+    flex:0.1;
+    
+}
+
+.bookings{
+    margin-top: 2rem;
+    flex:1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.booking{
+    flex:1;
+    max-width:20vw;
+    min-width: 20rem;
+    text-align: left;
+    border: 1px solid #dbdbdb;
+    padding:1rem;
+    border-radius: 0.75rem;
+    margin:1rem;
+}
+.booking:hover{
+    cursor: pointer;
+
+}
+img{
+    max-width: 100%;
+}
+a i{
+    margin: 1rem;
+    color:rgb(236, 235, 228);
+    text-decoration: none;
+}
+.home a i{
+    font-size: 1.7rem;
+
+}
+
+h1,h2{
+    margin:1rem;
+}
+.booking a i{
+    font-size: 1.1rem;
+    visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.booking:hover .cancel a i,.cancel a i:hover{
+    visibility: visible;
+  opacity: 1;
+}
+.cancel a i:hover{
+    color: rgb(206, 43, 43);
+    
+}
+</style> -->
+
+{% endblock %}

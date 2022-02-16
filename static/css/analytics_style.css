@@ -1,0 +1,556 @@
+/* ==========================
+Analytics
+============================= */
+
+/* Google Font Link */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: black;
+  background: #f1f2f7;
+  font-family: "Poppins", sans-serif;
+  padding: 0px !important;
+  margin: 0px !important;
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+}
+
+.dashboard{
+    padding: 0px 15px;
+    margin: 0 auto;
+}
+
+/* ==========================
+Main Dashboard
+============================= */
+/* Search */
+.dashboard .main .search form{
+    position: relative;
+}
+.dashboard .main .search{
+    margin-top: 40px;
+}
+.dashboard .main .search form input{
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 10px 10px 60px;
+    border: 1px solid #dadada;
+    background-color: rgba( 0 0 0 / 0);
+}
+.dashboard .main .search form span{
+    position: absolute;
+    left: 15px;
+    top: 10px;color: #727272;
+}
+.dashboard .main .search .notification{
+    margin-top: 20px;
+}
+.dashboard .main .search .notification span:nth-child(1){
+    margin-right: 15px;
+    position: relative;
+}
+.dashboard .main .search .notification span:nth-child(1)::before{
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: sandybrown;
+    position: absolute;
+    border-radius: 50%;
+    top: 5px;
+}
+
+/* My Project */
+.dashboard .main .title{
+    margin-bottom: 30px;
+}
+.dashboard .main .title h1{
+    font-size: 35px;
+    line-height: 0px;
+}
+.dashboard .main .title{
+    margin-top: 40px;
+}
+.dashboard .main .title label{
+    margin-right: 15px;
+    color: #727272;
+    font-size: 16px;
+}
+.dashboard .main .title select{
+    border: none;
+    font-size: 16px;
+    background-color: rgba( 0 0 0 / 0);
+}
+
+/* Project List (Card style) */
+.dashboard .main .project_list .project h2{
+    font-size: 20px;
+    line-height: 0;
+}
+.dashboard .main .project_list .project p{
+    color: #727272;
+}
+.dashboard .main .project_list .project ul {
+    list-style: none;
+    position: relative;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.dashboard .main .project_list .project ul li {
+    position: relative;
+    color: #727272;
+    margin-left: 15px;
+}
+.dashboard .main .project_list .project ul li::before {
+    content: "\268A";
+    position: absolute;
+    left: -15px;
+    top: -5px;
+}
+.dashboard .main .project_list .project .meta img {
+    width: 50px;
+    height: 50px;
+    border-radius: 40px;
+    border: 4px solid aliceblue;
+}
+.dashboard .main .project_list .project .meta img.stack {
+    margin-left: -20px;
+}
+.dashboard .main .project_list .project .meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+.dashboard .main .project_list .project {
+    padding: 20px 20px 20px 20px;
+    background-color: white;
+    box-shadow: 1px 1px 40px rgba( 0 0 0 / .01);
+    margin-bottom: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+.dashboard .main .project_list .category {
+    width: 30px;
+    height: 50px;
+    background-color: rebeccapurple;
+    border-radius: 0px 10px 10px 0px;
+    position: absolute;
+    left: 0;
+}
+.category_color1{
+    background-color: tan !important;
+}
+.category_color2{
+    background-color: rebeccapurple !important;
+}
+.category_color3{
+    background-color: sandybrown !important;
+}
+.category_color4{
+    background-color: lightcyan !important;
+}
+
+/* ==========================
+Secondary Statics
+============================= */
+/* Chart */
+.dashboard .secondary .chart .complete{
+    text-align: center;
+    margin: 40px 0px;
+}
+.dashboard .secondary .chart .complete h3{
+    line-height: 0px;
+}
+.dashboard .secondary .chart .complete p{
+    color: #727272;
+}
+.dashboard .secondary .chart{
+    background-color: #fff;
+    padding: 15px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+/* Recent Projects */
+.dashboard .secondary .recent_project .listing h2{
+    line-height: 0px;
+}
+.dashboard .secondary .recent_project .listing p{
+    color: #727272;
+}
+.dashboard .secondary .recent_project .listing{
+    display: flex;
+    justify-content: space-between;
+}
+.dashboard .secondary .recent_project{
+    background-color: #fff;
+    padding: 15px 15px 15px 60px;
+    position: relative;
+    margin-bottom: 30px;
+}
+.dashboard .secondary .recent_project .category{
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    position: absolute;
+    left: 10px;
+    margin-top: 20px;
+}
+
+/* ==========================
+Media Query 768xp 
+============================= */
+@media only screen and (min-width: 768px){
+    /* Dashboard Search */
+    .dashboard .main .search{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 70px;
+        margin-bottom: 50px;
+    }
+    .dashboard .main .search form{
+        margin-top: 10px;
+    }
+    section.main .project_list{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    section.main .project_list .project{
+        width: 47%;
+    }
+    section.main .project_list .project span{
+        margin-top: 15px;
+    }
+
+    /* Recent Projects */
+    section.secondary{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        background-color: #ffffff;
+        padding-top: 70px;
+    }
+    section.secondary .chart{
+        width: 40%;
+    }
+    section.secondary .recent_project{
+        width: 55%;
+    }
+    section.secondary .recent_project .listing span{
+        margin-top: 15px;
+    }
+}
+
+@media only screen and (min-width: 1024px){
+    .dashboard .navigation,
+    .dashboard .navigation div span,
+    section.secondary{
+        display: block;
+    }
+    .dashboard .navigation{
+        width: 60px;
+        position: fixed;
+        z-index: 10;
+    }
+    section.main{
+        width: 60%;
+        margin-left: 90px;
+        margin-right: 20px;
+    }
+    section.secondary{
+        width: 27%;
+        padding-top: 0px;
+        position: fixed;
+        top: 20px;
+        right: 0px;
+        background-color: transparent;
+    }
+    section.secondary .chart,
+    section.secondary .recent_project{
+        width: 100%;
+        border-radius: 10px;
+    }
+    .dashboard .navigation div{
+        margin-top: 19vh;
+        margin-bottom: 19vh;
+    }
+    .dashboard .navigation div span{
+        margin-top: 5vh;
+    }
+}
+
+@media only screen and (min-width: 1111px){
+    section.main .project_list .project{
+        width: 32%;
+    }
+    section.main{
+        width: 65%;
+    }
+}
+@media only screen and (min-width: 1500px){
+    section.secondary .recent_project .listing:nth-child(4){
+        display: none;
+    }
+}
+
+/* ==========================
+MAIN CSS for SIDEBAR
+============================= */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: #ff8c00;
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+.sidebar.open {
+  width: 250px;
+}
+.sidebar .logo-details {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebar .logo-details .icon {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar .logo-details .logo_name {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name {
+  opacity: 1;
+}
+.sidebar .logo-details #btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details #btn {
+  text-align: right;
+}
+.sidebar i {
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+.sidebar .nav-list {
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebar li {
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.sidebar li .tooltip {
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar li:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar.open li .tooltip {
+  display: none;
+}
+.sidebar input {
+  font-size: 15px;
+  color: #ff8c00;
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: #fff;
+}
+.sidebar.open input {
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+.sidebar .bx-search {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: #ffa639;
+  color: #fff;
+}
+.sidebar.open .bx-search:hover {
+  background: #ffa639;
+  color: #fff;
+}
+.sidebar .bx-search:hover {
+  background: #fff;
+  color: #ff8c00;
+}
+.sidebar li a {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #ff8c00;
+}
+.sidebar li a:hover {
+  background: #fff;
+}
+.sidebar li a .links_name {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar.open li a .links_name {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+  transition: all 0.5s ease;
+  color: #ff8c00;
+}
+.sidebar li i {
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.sidebar li.profile {
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #ffa639;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.sidebar.open li.profile {
+  width: 250px;
+}
+.sidebar li .profile-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebar li img {
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+.sidebar li.profile .name,
+.sidebar li.profile .job {
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar li.profile .job {
+  font-size: 12px;
+}
+.sidebar .profile #log_out {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #ffa639;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out {
+  width: 50px;
+  background: none;
+}
+.home-section {
+  position: relative;
+  background: #e4e9f7;
+  min-height: 100vh;
+  margin: 0;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+.sidebar.open ~ .home-section {
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.home-section .text {
+  display: inline-block;
+  color: #ff8c00;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px;
+}
+@media (max-width: 420px) {
+  .sidebar li .tooltip {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+/* END OF MAIN CSS FOR SIDEBAR */  

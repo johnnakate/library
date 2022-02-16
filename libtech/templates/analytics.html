@@ -1,0 +1,231 @@
+{% load static %} 
+{% block headerinclude %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>LIBTECH: Analytics</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicons -->
+  <link href="{% static 'img/logo.png' %}" rel="icon">
+  <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+
+  <!-- Bootstrap CSS -->
+  <!-- <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">  -->
+
+  <!-- Custom CSS Stylesheet -->
+  <link rel="stylesheet" href="{% static '/css/analytics_style.css' %}">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+  <!-- Box Icons for SIDEBAR -->
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet"/>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+{% endblock headerinclude %} 
+{% block content %}
+<body>
+  {% include 'base/sidebar.html' %}
+    
+  <!-- Dashboard -->
+  <div class="dashboard"><br>
+    <!-- Main -->
+    <section class="main">
+      <div class="title">
+        <h1>Analytics</h1>
+      </div>
+        
+      <div class="project_list">
+        <div class="project">
+          <h1>User Distribution</h1>
+          <canvas id="doughnut-chart" width="400" height="400"></canvas>
+      <!--  <div class="complete">
+              <h3>3 Completed</h3>
+              <p>from 5 projects</p>
+          </div> -->
+        </div> 
+          
+        <div class="project">
+          <h1>Monthly App Usage</h1>
+          <canvas id="bar-chart" width="400" height="400"></canvas>
+        </div>
+        
+        <div class="project">
+          <h1>Users Peak</h1>
+          <canvas id="line-chart" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </section>
+    <!-- Main End -->
+  </div>
+  <!-- Dashboard End-->
+  
+</body>
+</html>
+{% endblock content %}
+{% block footerinclude %}
+
+<!-- Main JS for Account Settings -->
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+
+<!-- plugins:js -->
+<script src="{% static 'js/vendor.bundle.base.js' %}"></script>
+
+<!-- Plugin js for this page -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'js/dataTables.select.min.js' %}"></script>
+
+<!-- End plugin js for this page -->
+<!-- ScrollIt js -->
+<script src="{% static 'js/scrollIt.min.js' %}"></script>
+
+<!-- inject:js -->
+<script src="{% static 'js/off-canvas.js' %}"></script>
+<script src="{% static 'js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'js/template.js' %}"></script>
+<script src="{% static 'js/settings.js' %}"></script>
+<script src="{% static 'js/todolist.js' %}"></script>
+
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/admin-dashboard.js' %}"></script>
+<script src="{% static 'js/Chart.roundedBarCharts.js' %}"></script>
+
+<script type="text/javascript">
+  // Chart JS - https://www.chartjs.org/docs/latest/
+
+  // Doughnut Chart
+  var ctxA = document.getElementById('doughnut-chart').getContext('2d');
+  var myDoughnutChart = new Chart(ctxA, {
+    type: 'doughnut',
+    data: {
+      labels: ['Administrator', 'Student', 'Staff', 'Faculty'],
+      // labels: [{% for i in users  %} '{{ i.profile.role }}', {% endfor %}],
+
+      datasets: [{
+        // label: 'My First Dataset',
+        data: ['{{ admin_count }}', '{{ student_count }}', '{{ staff_count }}', '{{ faculty_count }}'],
+        // data: [300, 800, 1200, 150],
+
+        backgroundColor: [
+          'rgba(255, 99, 132)', // Red
+          'rgba(54, 162, 235)', // Blue
+          'rgba(255, 206, 86)', // Yellow
+          'rgba(75, 192, 192)', // Green
+          'rgba(153, 102, 255)', // Purple
+          'rgba(255, 159, 64)', // Orange
+          'rgba(201, 203, 207)' // Gray
+        ],
+        hoverOffset: 4
+      }]
+    },
+  });
+  
+  // Bar chart
+  var ctxB = document.getElementById('bar-chart').getContext('2d');
+  var myBarChart = new Chart(ctxB, {
+    type: 'bar',
+    data: {
+      labels: ['October', 'November', 'December'],
+      
+      datasets: [{
+        label: 'Active Users',
+        data: [, , '{{ users_count }}'],
+        // data: [784,734,933,1267,978],
+
+        backgroundColor: [
+          'rgba(255, 99, 132)', // Red
+          'rgba(54, 162, 235)', // Blue
+          'rgba(255, 206, 86)', // Yellow
+          'rgba(75, 192, 192)', // Green
+          'rgba(153, 102, 255)', // Purple
+          'rgba(255, 159, 64)', // Orange
+          'rgba(201, 203, 207)' // Gray
+        ],
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      legend: { display: false },
+      
+      title: {
+        display: true,
+        // text: 'Amount of Users'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+           beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+  
+  // Line Chart
+  // var ctxC = document.getElementById('line-chart').getContext('2d');
+  // var myLineChart = new Chart(ctxC, {
+  new Chart(document.getElementById("line-chart"), {
+    type: 'line',
+    data: {
+      labels: ['October', 'November', 'December'],
+      // labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+      
+      datasets: [{ 
+          data: [0, 0, '{{ admin_count }}'],
+          label: "Administrator",
+          borderColor: "rgba(255, 99, 132)", // Red
+          fill: false
+        }, { 
+          data: [0, 0, '{{ student_count }}'],
+          label: "Student",
+          borderColor: "rgba(255, 159, 64)", // Orange
+          fill: false
+        }, { 
+          data: [0, 0, '{{ staff_count }}'],
+          label: "Staff",
+          borderColor: "rgba(255, 205, 86)", // Yellow
+          fill: false
+        }, { 
+          data: [0, 0, '{{ faculty_count }}'],
+          label: "Faculty",
+          borderColor: "rgba(75, 192, 192)", // Green
+          fill: false
+        }/*, { 
+          data: [6,3,2,2,7,26,82,172,312,433],
+          label: "December",
+          borderColor: "rgba(54, 162, 235)", // Blue
+          fill: false
+        }*/
+      ]
+    },
+    options: {
+      legend: { display: true },
+      title: {
+        // display: false,
+        // text: 'Sample Text',
+        // position: 'bottom'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+           beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+{% endblock footerinclude %}

@@ -1,0 +1,146 @@
+{% load static %}
+{% block headerinclude %}
+<!DOCTYPE html>
+<html lang="en" style="margin: 0">
+  <head>
+    <title>Libtech: Settings Password</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Favicons -->
+    <link href="{% static 'img/logo.png' %}" rel="icon">
+    <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">  -->
+
+    <!-- Custom CSS Stylesheet (for your changes) and other dependencies-->
+    <link rel="stylesheet" href="{% static '/css/settings.css' %}" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS V2  -->
+    <link
+      href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  {% endblock headerinclude %} 
+  {% block content %}
+  <body>
+    {% include 'base/sidebar.html' %}
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!--START OF HOME-SECTION-->
+    <section class="home-section">
+      <!--START OF CONTENT WRAPPER-->
+      <div class="container bootstrap snippets bootdey">
+        <div class="row">
+          <div class="profile-nav col-md-3">
+            <div class="panel">
+              <!-- <div class="user-heading round">
+                <a href="#">
+                  <img
+                    src="{{ user.profile.image.url }}"
+                    alt="User Profile Picture"
+                  />
+                </a>
+                <h1>{{user.username}}</h1>
+                <p>{{user.email}}</p>
+              </div> -->
+              <h3>Account Settings</h3>
+
+              <ul class="nav nav-pills nav-stacked">
+                <li>
+                  <a href="{% url 'settings-account' %}"> <i class="fa fa-user"></i>Password</a>
+                </li>
+                <li class="active">
+                  <a href="{% url 'settings-pass' %}">
+                    <i class="fa fa-lock"></i> Password
+                    <!-- <span class="label label-warning pull-right r-activity"
+                      >9</span>--></a>
+                
+                </li>
+                <!-- <li>
+                  <a href="{% url 'profile-update' %}">
+                    <i class="fa fa-edit"></i> Edit Profile</a
+                  >
+                </li> -->
+              </ul>
+            </div>
+          </div>
+
+          <div class="profile-info col-md-9">
+            <div class="panel">
+              <div class="panel-body bio-graph-info">
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+
+                <h1>Change Password</h1>
+                <div class="row" style="padding: 10px;">
+                    <div>
+                    <p><span>Current Password </span><input type="text" class="form-control" placeholder="Current password" name="password1"></p>
+                    </div>
+                    <div>
+                      <p><span>New Password</span><input type="text" class="form-control" placeholder="New password" name="newpassword"></p>
+                    </div>
+                    <div>
+                    <p><span>Re-type New Password</span><input type="text" class="form-control" placeholder="Re-type new password" name="newpassword"></p>
+                    </div>
+                    
+
+                </div>
+                
+                <br>     
+                    <a class="btn btn-secondary" href="{% url 'profile' %}" style="margin-left: 260px; background-color: gray; border-color: gray; color: honeydew;">Cancel</a>
+                    <input class="btn btn-info" type="submit" value="Update Password" style="background-color: #ff8c00; border-color: #ff8c00;">
+                </form>  
+              </div>
+            </div>
+
+            <div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--END OF CONTENT WRAPPER-->
+    </section>
+    <!--END OF HOME-SECTION-->
+  </body>
+</html>
+{% endblock content %} {% block footerinclude %}
+<!-- plugins:js -->
+<script src="{% static 'js/vendor.bundle.base.js' %}"></script>
+
+<!-- Plugin js for this page -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'js/dataTables.select.min.js' %}"></script>
+
+<!-- End plugin js for this page -->
+<!-- ScrollIt js -->
+<script src="{% static 'js/scrollIt.min.js' %}"></script>
+
+<!-- inject:js -->
+<script src="{% static 'js/off-canvas.js' %}"></script>
+<script src="{% static 'js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'js/template.js' %}"></script>
+<script src="{% static 'js/settings.js' %}"></script>
+<script src="{% static 'js/todolist.js' %}"></script>
+
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/admin-dashboard.js' %}"></script>
+<script src="{% static 'js/Chart.roundedBarCharts.js' %}"></script>
+<!-- End custom js for this page-->
+{% endblock footerinclude %}

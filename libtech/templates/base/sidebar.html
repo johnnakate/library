@@ -1,0 +1,74 @@
+{% load static %}
+<!--SIDE BAR-->
+<div class="sidebar">
+  <div class="logo-details">
+    <i class="bx bx-book-reader icon"></i>
+    <div class="logo_name">LibTechº</div>
+    <i class="bx bx-menu" id="btn"></i>
+  </div>
+  <ul class="nav-list">
+    <li>
+      <i class="bx bx-search"></i>
+      <input type="text" placeholder="  Search..." />
+      <span class="tooltip">Search</span>
+    </li>
+    <li>
+      <a data-scroll-nav="0" href="{% url 'admin-dashboard'%}">
+        <i class="bx bx-grid-alt"></i>
+        <span class="links_name">Dashboard</span>
+      </a>
+      <span class="tooltip">Dashboard</span>
+    </li>
+    
+    <!-- SIDEBAR: Redirect to the Data Analytics page -->
+    <li>
+      <a data-scroll-nav="1" href="{% url 'admin-analytics' %}">
+        <i class="bx bx-pie-chart-alt-2"></i>
+        <span class="links_name">Analytics</span>
+      </a>
+      <span class="tooltip">Analytics</span>
+    </li>
+
+    <li>
+      <a data-scroll-nav="2" href="{% url 'reservation_type' %}">
+        <i class="bx bx-calendar-check"></i>
+        <span class="links_name">Reservation</span>
+      </a>
+      <span class="tooltip">Reservation</span>
+    </li>
+    <li>
+      <a data-scroll-nav="3" href="{% url 'profile' %}">
+        <i class="bx bx-user"></i>
+        <span class="links_name">Profile</span>
+      </a>
+      <span class="tooltip">Profile</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bx-analyse"></i>
+        <span class="links_name">360 Tour</span>
+      </a>
+      <span class="tooltip">360 Tour</span>
+    </li>
+    <li>
+      <a href="{% url 'settings-account' %}">
+        <i class="bx bx-cog"></i>
+        <span class="links_name">Settings</span>
+      </a>
+      <span class="tooltip">Settings</span>
+    </li>
+    <li class="profile">
+      <div class="profile-details">
+        <i class="bx bx-user"></i>
+        <div class="name_job">
+          <div class="name">{{ user.username }}</div>
+          <div class="job">{{ user.profile.role }}</div>
+        </div>
+      </div>
+      <a href="{% url 'logout' %}"
+        ><i class="bx bx-log-out" id="log_out"></i
+      ></a>
+    </li>
+  </ul>
+</div>
+<!--END OF SIDE BAR-->

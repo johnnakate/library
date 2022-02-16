@@ -1,0 +1,324 @@
+{% load static %}
+{% block headerinclude %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <title>LibTech</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Favicons -->
+  <link href="{% static 'img/logo.png' %}" rel="icon">
+  <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+
+  <!-- owl carousel css --> 
+  <link rel="stylesheet" href="{% static '/css/owl.carousel.min.css' %}"> 
+
+  <!-- font awesome icons --> 
+  <link rel="stylesheet" href="{% static '/css/font-awesome.css' %}"> 
+
+  <!-- bootstrap css --> 
+  <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"> 
+ 
+  <!-- main css -->
+  <link rel="stylesheet" href="{% static '/css/landingstyle.css' %}">
+ 
+</head>
+{% endblock headerinclude %}
+{% block content %}
+<body>
+  <!-- NAVBAR START-->
+  <nav class="navbar navbar-expand-md fixed-top">
+    <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand" href="{% url 'landing' %}">LibTechº</a>
+  
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link active" data-scroll-nav="0" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-scroll-nav="1" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-scroll-nav="2" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-scroll-nav="3" href="#">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </nav>
+  <!-- NAVBAR END -->
+
+  <!-- HOME START -->
+    <section id="home" class="home d-flex align-items-center" data-scroll-index="0">
+      <div class="effect-wrap">
+        <i class="fas fa-plus effect effect-1"></i>
+        <i class="fas fa-plus effect effect-3"></i>
+        <i class="fas fa-circle-notch effect effect-3"></i>
+      </div>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-7 col-md-7">
+
+          </div>
+          <div class="col-lg-7 col-md-7">
+            <div class="home-text">
+              <h1>LibTech</h1>
+              <p>A Library Seat Reservation System 
+                Integrated with 360° Virtual Tour and Prescriptive 
+                Analytics</p>
+              <div class="home-btn">
+                <a href="#" class="btn btn-1">Get Started</a>
+              </div>
+            </div> 
+          </div>
+          <div class="col-lg-5 col-md-5 text-center">
+            <div class="home-img">
+              <div class="circle"></div>
+              <img src="{% static 'img/app-screenshots/4.png' %}"> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- HOME END -->
+
+  <!--ABOUT START-->
+  <section id="about" class="about section-padding" data-scroll-index="1"> 
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-5 d-flex align-items-center justify-content-center">
+          <div class="about-img">
+            <img src="{% static 'img/app-screenshots/5.png' %}"> 
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-7">
+          <div class="section-title">
+            <h2>about <span>LibTech</span></h2>
+          </div>
+          <div class="About-text">
+            <p>CIT-U Library Reservations System is a web and mobile based system that will allow students to view 
+              the remaining available seats and discussion rooms inside the CIT-U college library. This aims to 
+              minimize overcrowding inside the library, especially when the exam period comes you can choose your 
+              spot for the discussion rooms conveniently. A reservation ensures that the room is saved for the student 
+              and cannot be taken by another patron during the said scheduled time.</p>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="about-item style-1">
+                    <h3>2345</h3>
+                    <span>Reservations</span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="about-item style-2">
+                    <h3>4082</h3>
+                    <span>Visits</span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="about-item style-3">
+                    <h3>1056</h3>
+                    <span>Users</span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="about-item style-4">
+                    <h3>3026</h3>
+                    <span>Guests</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--ABOUT END-->
+
+
+    <!--FEATURES START-->
+    <section id="features" class="features section-padding" data-scroll-index="2">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="section-title">
+            <h2>main <span>features</span></h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="owl-carousel features-carousel">
+            <div class="feature-item">
+              <div class="icon"><i class="fas fa-code"></i></div>
+                <h3>Reservation</h3>
+                <p>Allow users to reserve seats or discussion rooms at CIT-U Library, 
+                  along with their chosen preferred date and time for the reservation. </p>
+            </div>
+            <div class="feature-item">
+              <div class="icon"><i class="fas fa-edit"></i></div>
+                <h3>360° Virtual Tour</h3>
+                <p>Integrates a 360° view for users to virtually explore
+                  the interiors of CIT-U Library in a more convenient way.</p>
+            </div>
+            <div class="feature-item">
+              <div class="icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>Web Analytics Dashboard</h3>
+                <p>Monitor app usage metrics which are presented through 
+                  interactive visualizations like graphs and charts.</p>
+            </div>
+            <div class="feature-item">
+              <div class="icon"><i class="fas fa-check"></i></div>
+                <h3>User Foot Traffic</h3>
+                <p>Forecast user trends to provide an outlook to when does users 
+                  are most likely to use the app's services.
+                  </p>
+            </div>
+          </div>
+        </div>
+      </div>   
+    </section>
+    <!--FEATURES END-->
+
+    <!--TEAM START-->
+    <section id="team" class="team section-padding" data-scroll-index="3">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="section-title">
+              <h2>Team <span>CLARA</span></h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="owl-carousel team-carousel">
+            <div class="team-item">
+              <img src="{% static 'img/team/delavega.jpg' %}"> 
+              <h3>Johhna Kate Dela Vega</h3>
+              <span>Full Stack Developer</span>
+            </div>
+            <div class="team-item">
+              <img src="{% static 'img/team/naldoza.jpg' %}"> 
+              <h3>Ma. Leandra Naldoza</h3>
+              <span>Frontend Developer</span>
+            </div>
+            <div class="team-item">
+              <img src="{% static 'img/team/paña.jpg' %}"> 
+              <h3>Mary Jane Paña</h3>
+              <span>Full Stack Developer</span>
+            </div>
+            <div class="team-item">
+              <img src="{% static 'img/team/rosales.jpg' %}"> 
+              <h3>Bob Kent Rosales</h3>
+              <span>Frontend Developer</span>
+            </div>
+            <div class="team-item">
+              <img src="{% static 'img/team/ypanto.jpg' %}"> 
+              <h3>Inocentes Jon Ypanto</h3>
+              <span>Full Stack Developer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--TEAM END-->
+
+    <!--FOOTER-->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-col">
+              <h3>About us</h3>
+              <p>
+                LibTech is a Library Seat Reservation System Integrated with 360° Virtual Tour and Prescriptive Analytics.
+                This aims to minimize overcrowding inside the library and choose a spot for the seat or discussion rooms conveniently.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-col">
+              <h3></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-col">
+              <h3>Quick links</h3>
+              <ul>
+                <li><a href="#home">home</a></li>
+                <li><a href="#about">about</a></li>
+                <li><a href="#features">features</a></li>
+                <li><a href="#team">team</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-col">
+              <h3>Follow us</h3>
+              <ul>
+                <li><a href="#">facebook</a></li>
+                <li><a href="#">instagram</a></li>
+                <li><a href="#">twitter</a></li>
+                <li><a href="#">youtube</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="copyright-text">&copy;2021 @LibTech Website</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!--FOOTER-->
+
+    
+  </body>
+  </html>
+{% endblock content %}
+
+{% block footerinclude %}
+    <!-- jquery js -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+  
+    <!-- popper js -->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+
+    <!-- bootstrap js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- owl carousel js -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+
+    <!-- ScrollIt js -->
+    <script src="{% static 'js/scrollIt.min.js' %}"></script>
+
+    <!-- main js -->
+    <script src="{% static 'js/main.js' %}"></script>
+{% endblock footerinclude %}
+
+
+
+
+ 
+ 
+
+

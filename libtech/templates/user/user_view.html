@@ -1,0 +1,240 @@
+{% load static %} {% block headerinclude %} {% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicons -->
+    <link href="{% static 'img/logo.png' %}" rel="icon">
+    <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/user_view.css' %}" />
+
+    <!--MODAL-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
+    />
+    <title>Libtech: User Detail</title>
+  </head>
+  {% endblock headerinclude %} {% block content %}
+  <body>
+    {% include 'base/sidebar.html' %}
+
+    <!--START OF HOME-SECTION-->
+    <section class="home-section">
+      <!--START OF CONTENT WRAPPER-->
+      <div class="content-wrapper">
+        <!--START OF DATASCROLL INDEX-0-->
+        <div data-scroll-index="0">
+          <!--START OF ROW_1-->
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                  <h3 class="font-weight-bold">
+                    <a
+                      href="{%url 'admin-dashboard' %}"
+                      style="color: black; text-decoration: none"
+                      >Admin Dashboard</a
+                    >
+                  </h3>
+                  <h6 class="font-weight-normal mb-0">
+                    Hello {{ user.username }} ! what do you want to do?
+                    <span class="text-primary">3 unread alerts!</span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--END OF ROW_1-->
+        </div>
+
+        {% include 'base/topnav.html' %}
+
+        <!--START OF CONTENT WRAPPER-->
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="container bootstrap snippets bootdey">
+                <div class="row">
+                  <div class="profile-nav col-md-3">
+                    <div class="panel">
+                      <div class="user-heading round">
+                        <a href="#">
+                          <img
+                            src="{{ users.profile.image.url }}"
+                            alt="User Profile Picture"
+                          />
+                        </a>
+                        <h1>{{users.username}}</h1>
+                        <p>{{users.email}}</p>
+                      </div>
+
+                      <!-- <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+            <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
+            <li><a href="{% url 'profile-update' %}"> <i class="fa fa-edit"></i> Edit Profile</a></li>
+          </ul> -->
+                    </div>
+                  </div>
+
+                  <div class="profile-info col-md-9">
+                    <div class="panel">
+                      <!-- <div class="bio-graph-heading">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+          </div> -->
+
+                      <a
+                        class="btn btn-info btn-sm float-right"
+                        href="{% url 'user-detail' %}"
+                        style="
+                          background-color: #ff8c00;
+                          border: none;
+                          font-weight: bold;
+                        "
+                        >EXIT</a
+                      >
+
+                      <div class="panel-body bio-graph-info">
+                        <h1 style="font-weight: bold">Users Information</h1>
+                        <div class="row">
+                          <div class="bio-row">
+                            <p>
+                              <span>First Name </span>: {{users.first_name}}
+                            </p>
+                          </div>
+                          <div class="bio-row">
+                            <p><span>Last Name </span>: {{users.last_name}}</p>
+                          </div>
+                          <div class="bio-row">
+                            <p>
+                              <span>Address </span>: {{users.profile.address}}
+                            </p>
+                          </div>
+                          <div class="bio-row">
+                            <p>
+                              <span>Account Role </span>: {{users.profile.role}}
+                            </p>
+                          </div>
+                          <div class="bio-row">
+                            <p><span>Birthday</span>: 13 March 2000</p>
+                          </div>
+                          <div class="bio-row">
+                            <p>
+                              <span>Occupation </span>:
+                              {{users.profile.occupation}}
+                            </p>
+                          </div>
+                          <div class="bio-row">
+                            <p><span>Email </span>: {{users.email}}</p>
+                          </div>
+
+                          <div class="bio-row">
+                            <p><span>Phone </span>: {{users.profile.phone}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--END OF CONTENT WRAPPER-->
+
+        <!--START OF USER TABLE-->
+        <!-- <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="ml-xl-4 mt-3">
+                  <p class="card-title">User Information
+                    <a class="btn btn-info btn-sm float-right" href="{% url 'user-detail' %}">Exit</a>
+                </div> 
+                  <div class="row my-4">
+                      <div class="col-md-4"></div>
+                      
+                      <table class="table table-borderless">
+                        <thead>
+                            <hr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ users.username }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ users.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone</th>
+                                <td>{{ users.profile.phone }}</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>{{ users.profile.address }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>  
+                  <div class="col-md-4">
+                    <img class="img-thumbnail" src="{{ user.profile.image.url }}" alt="profile-image">
+                </div>  
+          </div>
+        </div>
+      </div>           -->
+        <!--END OF ROW_4-->
+
+        <!--END OF CONTENT WRAPPER-->
+      </div>
+    </section>
+    <!--END OF HOME-SECTION-->
+  </body>
+</html>
+
+{% endblock content %} {% block footerinclude %}
+<!-- plugins:js -->
+<script src="{% static 'js/vendor.bundle.base.js' %}"></script>
+<!-- Plugin js for this page -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'js/dataTables.select.min.js' %}"></script>
+<!-- End plugin js for this page -->
+<!-- ScrollIt js -->
+<script src="{% static 'js/scrollIt.min.js' %}"></script>
+
+<!-- inject:js -->
+<script src="{% static 'js/off-canvas.js' %}"></script>
+<script src="{% static 'js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'js/template.js' %}"></script>
+<script src="{% static 'js/settings.js' %}"></script>
+<script src="{% static 'js/todolist.js' %}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/admin-dashboard.js' %}"></script>
+<script src="{% static 'js/Chart.roundedBarCharts.js' %}"></script>
+<!-- End custom js for this page-->
+
+<!-- <script>
+  $('#btn').on('click', function () {
+    $('#exampleModal').modal('show');
+});
+</script> -->
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/boostrap.bundle.min.js"
+integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//E1J19smozuHV6z3Iehds+3U1b9Bn9P1x0x4"
+crossorigin="anonymous"></script> -->
+
+{% endblock footerinclude %}

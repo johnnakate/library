@@ -1,0 +1,299 @@
+{% load static %}
+{% block headerinclude %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+  <!-- Favicons -->
+  <link href="{% static 'img/logo.png' %}" rel="icon">
+  <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static '/css/indexstyle.css' %}">
+
+  <!-- data table -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+  <title>Libtech: Dashboard</title>
+</head>
+{% endblock headerinclude %}
+{% block content %}
+<body>
+  {% include 'base/sidebar.html' %}
+
+  <!--START OF HOME-SECTION-->
+  <section class="home-section">
+    <!--START OF CONTENT WRAPPER-->
+    <div class="content-wrapper">
+      <!--START OF DATASCROLL INDEX-0-->
+      <div data-scroll-index="0">
+        <!--START OF ROW_1-->
+        <div class="row">
+          <div class="col-md-12 grid-margin">
+            <div class="row">
+              <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <h3 class="font-weight-bold"><a href="{%url 'admin-dashboard' %}" style="color:black; 
+            text-decoration: none;">User Dashboard</a></h3>
+                <!-- <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6> -->
+                <h6 class="font-weight-normal mb-0">Hello {{ user.username }}! Today {{ today }},
+                  <span class="text-primary">{{ foot_traffic }} users have reserved! </span></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--END OF ROW_1-->
+      </div>
+      <!--TOPNAV-->
+      <div class="row">
+        <div class="col-md-6 grid-margin transparent">
+          <div class="row">
+            <div class="col-md-6 mb-4 stretch-card transparent">
+              <div class="card card-tale">
+                <a class="text-decoration-none text-dark">
+                  <div class="card-body">
+                    <p class="mb-4" style="color:white;">Current Reservations</p>
+                    <p class="fs-30 mb-2" style="color:white;">{{ current_res }}</p>
+                    <p style="color:white;">10.00% (30 days)</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4 stretch-card transparent">
+              <div class="card card-dark-blue">
+                <a class="text-decoration-none text-dark">
+                  <div class="card-body">
+                    <p class="mb-4" style="color:white;">Total Number of Reservations</p>
+                    <p class="fs-30 mb-2" style="color:white;">{{ res_count }}</p>
+                    <p style="color:white;">22.00% (30 days)</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+              <div class="card card-light-blue">
+                <a class="text-decoration-none text-dark">
+                  <div class="card-body">
+                    <p class="mb-4" style="color:white;">Past Reservations</p>
+                    <p class="fs-30 mb-2" style="color:white;">4</p>
+                    <p style="color:white;">2.00% (30 days)</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4 stretch-card transparent">
+              <div class="card card-light-danger">
+                <a class="text-decoration-none text-dark">
+                  <div class="card-body">
+                    <p class="mb-4" style="color:white;">Total Number of Cancels</p>
+                    <p class="fs-30 mb-2" style="color:white;">6</p>
+                    <p style="color:white;">22.00% (30 days)</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+          <div class="card tale-bg">
+            <div class="card-people mt-auto">
+              <img src="{% static 'img/people.svg' %}" />
+              <div class="weather-info">
+                <div class="d-flex">
+                  <div>
+                    <h2 class="mb-0 font-weight-normal">
+                      <i class="bx bx-sun icon"></i>31<sup>C</sup>
+                    </h2>
+                  </div>
+                  <div class="ml-2">
+                    <h4 class="location font-weight-normal">Cebu City</h4>
+                    <h6 class="font-weight-normal">Philippines</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--START OF USER TABLE-->
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="row p-3">
+              <div class="col-md-4">
+                <h3>My Reservations</h3>
+              </div>
+              <div class="col-md-4">
+                <a href="{% url 'reservation_type' %}" class="btn btn-danger btn-sm ml-2" style="background-color: #ff8c00;
+                      border: none;font-weight: 500;color: #fff; float: right; margin-right: -95%;">+ Add
+                  Reservation</a>
+              </div>
+            </div>
+            <table class="table table-borderless mydatatable">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Start Time</th>
+                  <th scope="col">End Time</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for reservations in reservations %}
+                {% if reservations.users == user %}
+                <tr>
+                  <td>{{ reservations.seat.category }} {{ reservations.room.category }}</td>
+                  <td>{{ reservations.seat.type }} {{ reservations.room.type }}</td>
+                  <td>{{ reservations.date }}</td>
+                  <td>{{ reservations.start_time }}</td>
+                  <td>{{ reservations.end_time }}</td>
+                  <td>{{ reservations.duration }}</td>
+                  <td class="font-weight-medium">
+                    <!-- <div class="badge badge-warning">Pending</div> -->
+                    <div class="row status-div">
+                      {% if reservations.status == 'CONFIRMED' %}
+                      <div class="badge badge-success">CONFIRMED</div>
+                      {% endif %}
+                      <!-- {% if reservations.status == 'PENDING' %}
+                                          <div class="orange">{{ticket.status}}</div>
+                                      {% endif %} -->
+                      {% if reservations.status == 'CANCELLED' %}
+                      <div class="badge badge-danger">CANCELLED</div>
+                      {% endif %}
+                    </div>
+                  <td>
+                    {% if reservations.status == 'CONFIRMED' %}
+                    <!-- <a class="btn btn-info btn-sm mr-2" data-toggle="modal" data-target="#myModalPrint"
+                                    href="">View</a> -->
+                                    <a class="btn btn-danger btn-sm ml-2" data-toggle="modal" data-target="#myModalCancel"
+                                    href="">Cancel</a>
+                                    {% endif %}
+                                   {% if reservations.status == 'CANCELLED' %}
+                                   {% endif %}
+                                  </td>
+
+                                   <!-- Cancel Modal -->
+                                <div class="modal" id="myModalCancel" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.8);">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    
+                                      <!-- Modal Header -->
+                                      <div class="modal-header">
+                                        <h4 class="modal-title">Cancel Reservation</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      </div>
+                                      
+                                      <!-- Modal body -->
+                                      <div class="modal-body">
+                                        Are you sure you want to cancel this reservation?
+                                      </div>
+                                      
+                                      <!-- Modal footer -->
+                                      <div class="modal-footer">
+                                        <button type="submit" id="btnCancel" name="btnCancel" class="btn btn-danger" data-dismiss="modal" style="background-color: orange; border:none" >Yes</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="background-color: gray; border:none">No</button>
+                                      </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </tr>
+                              {% endif %}
+                          {% endfor %}
+                              </tbody>
+                          </table>
+                      
+                  </div>  
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+</body>
+
+</html>
+{% endblock content %}
+
+{% block footerinclude %}
+<!-- plugins:js -->
+<script src="{% static 'js/vendor.bundle.base.js' %}"></script>
+<!-- Plugin js for this page -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'js/dataTables.select.min.js' %}"></script>
+<!-- End plugin js for this page -->
+<!-- ScrollIt js -->
+<script src="{% static 'js/scrollIt.min.js' %}"></script>
+
+<!-- inject:js -->
+<script src="{% static 'js/off-canvas.js' %}"></script>
+<script src="{% static 'js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'js/template.js' %}"></script>
+<script src="{% static 'js/settings.js' %}"></script>
+<script src="{% static 'js/todolist.js' %}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/admin-dashboard.js' %}"></script>
+<script src="{% static 'js/Chart.roundedBarCharts.js' %}"></script>
+<!-- End custom js for this page-->
+
+<!-- modal -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- print -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js">
+</script>
+<script type="text/javascript">
+  function Export() {
+    html2canvas(document.getElementById('user'), {
+      onrendered: function (canvas) {
+        var data = canvas.toDataURL();
+        var docDefinition = {
+          content: [{
+            image: data,
+            width: 500
+          }]
+        };
+        pdfMake.createPdf(docDefinition).download("Table.pdf");
+      }
+    });
+  }
+</script>
+<!-- for data table  -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+<script>
+  $('.mydatatable').DataTable({
+    order: [
+      [3, 'desc']
+    ],
+    pagingType: 'full_numbers',
+    lengthMenu: [
+      [5, 10, 25, 50, -1],
+      [5, 10, 25, 50, "All"]
+    ],
+  });
+</script>
+
+
+{% endblock footerinclude %}

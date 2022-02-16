@@ -1,0 +1,227 @@
+{% load static %}
+{% block headerinclude%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Libtech: Room Reservation</title>
+
+	<!-- Favicons -->
+	<link href="{% static 'img/logo.png' %}" rel="icon">
+	<link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+
+    <!--Font awesome CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+  <!-- font awesome icons --> 
+  <link rel="stylesheet" href="{% static '/css/font-awesome.css' %}"> 
+
+  <!-- bootstrap css --> 
+  <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"> 
+
+   <!-- owl carousel css --> 
+   <link rel="stylesheet" href="{% static '/css/owl.carousel.min.css' %}"> 
+ 
+  <!-- main css -->
+  <link rel="stylesheet" href="{% static '/css/roomreservation.css' %}">
+
+</head>
+{% endblock headerinclude %}
+{% block content %}
+<body>
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="booking-form">
+						<div class="form-header">
+							<h1>Reserve Rooms</h1>
+						</div>
+						<form id="form" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+							{% csrf_token %}
+							<div class="form-group">
+								<section id="team" class="team section-padding">
+									<div class="container">
+									  <div class="row">
+										<div class="owl-carousel room-carousel">
+										  <div class="team-item">
+											<img src="{% static 'img/room/2.jpg' %}"> 
+											<!-- <h3>Multimedia Nook</h3> -->
+										  </div>
+										  <div class="team-item">
+											<img src="{% static 'img/room/3.jpg' %}"> 
+											<!-- <h3>Collaborative Hubs</h3> -->
+										  </div>
+										  <div class="team-item">
+											<img src="{% static 'img/room/4.jpg' %}"> 
+											<!-- <h3>Pitch<br>Room</h3> -->
+										  </div>
+										  <div class="team-item">
+											<img src="{% static 'img/room/5.jpg' %}"> 
+											<!-- <h3>Discussion Rooms</h3> -->
+										  </div>
+										</div>
+									  </div>
+									</div>
+								  </section>
+							</div>
+							<!-- <div class="form-group">
+								<div class="form-checkbox">
+									<label for="roundtrip">
+										<input type="radio" id="roundtrip" name="flight-type">
+										<span></span>Roundtrip
+									</label>
+									<label for="one-way">
+										<input type="radio" id="one-way" name="flight-type">
+										<span></span>One way
+									</label>
+									<label for="multi-city">
+										<input type="radio" id="multi-city" name="flight-type">
+										<span></span>Multi-City
+									</label>
+								</div>
+							</div> -->
+							<!-- <div class="form-group">
+								<input class="form-control" type="text">
+								<span class="form-label">Flying from</span>
+							</div> -->
+							<div class="form-group">
+								<input class="form-control" type="text">
+								<span name="type" class="form-label">Type</span>
+							</div>
+							<div class="form-group">
+								<select name="roomName" class="form-control">
+									<option value="pitchroom">Pitch Room</option>
+									<option value="multimedianook">Multimedia Nook</option>
+									<option value="discussionroom1">Discussion Room #1</option>
+									<option value="discussionroom2">Discussion Room #2</option>
+									<option value="discussionroom3">Discussion Room #3</option>
+									<option>Collaborative Hub #1</option>
+									<option>Collaborative Hub #2</option>
+								</select>
+								<span class="select-arrow"></span>
+								<span class="form-label">Rooms</span>
+							</div>
+							<div class="form-group">
+								<input class="form-control" type="date">
+								<span name="reservationDate" class="form-label">Date</span>
+							</div>
+							<!-- <div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="date">
+										<span class="form-label">Check In</span>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="date">
+										<span class="form-label">Check Out</span>
+									</div>
+								</div>
+							</div> -->
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<!-- <select class="form-control">
+											<option>Economy class</option>
+											<option>Business class</option>
+											<option>First class</option>
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label">Travel class</span> -->
+										<input name="startTime" class="form-control" type="time" min="08:00" max="17:00">
+										<span class="form-label">Start Time</span>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<!-- <select class="form-control">
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label">Adults</span> -->
+										<input name="endTime" class="form-control" type="time" min="08:00" max="17:00">
+										<span class="form-label">End Time</span>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<!-- <select class="form-control">
+											<option>0</option>
+											<option>1</option>
+											<option>2</option>
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label">Children</span> -->
+										<div class="form-btn">
+											<button type="submit" class="submit-btn">Submit</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>
+	</div>
+</body>
+</html>
+{% endblock content %}
+
+{% block footerinclude %}
+	 <!-- jquery js -->
+	 <script src="{% static 'js/jquery.min.js' %}"></script>
+  
+	 <!-- popper js -->
+	 <script src="{% static 'js/popper.min.js' %}"></script>
+ 
+	 <!-- bootstrap js -->
+	 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+ 
+	 <!-- owl carousel js -->
+	 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+ 
+	 <!-- ScrollIt js -->
+	 <script src="{% static 'js/scrollIt.min.js' %}"></script>
+ 
+	 <!-- main js -->
+	 <script src="{% static 'js/main.js' %}"></script>
+
+	<script>
+		$('.form-control').each(function () {
+			floatedLabel($(this));
+		});
+
+		$('.form-control').on('input', function () {
+			floatedLabel($(this));
+		});
+
+		function floatedLabel(input) {
+			var $field = input.closest('.form-group');
+			if (input.val()) {
+				$field.addClass('input-not-empty');
+			} else {
+				$field.removeClass('input-not-empty');
+			}
+		}
+	</script>
+
+	<script>
+		 $('#timepicker').datetimepicker({
+        datepicker: false, 
+        step: 30,
+        format:'G:i A'
+    });
+	</script>
+
+{% endblock footerinclude %}

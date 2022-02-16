@@ -1,0 +1,249 @@
+{% load static %} {% block headerinclude %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicons -->
+    <link href="{% static 'img/logo.png' %}" rel="icon">
+    <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/add_reservation.css' %}" />
+    <!-- owl carousel css -->
+    <link rel="stylesheet" href="{% static '/css/owl.carousel.min.css' %}" />
+    
+
+    <!--For Date Validation-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"
+    />
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+      *{
+          font-family: 'Roboto', sans-serif;
+      }
+      .section1{
+          padding: 0px;
+          display: flex;
+          flex-direction: column;
+      }
+
+      .white{
+          color: white;
+          font-size: large;
+      }
+      .white-2{
+          font-size: medium;
+      }
+      .v-line{
+          border-left: 1px dashed rgba(255, 255, 255, .9);
+          height: 100%;
+          margin: 0px 15px;
+      }
+      .small-label{
+          font-size: .7em;
+          color: rgb(240, 240, 240);
+      }
+
+      .query-data-div{
+          min-height: 11vh;
+          background-color: #f94327;
+          background-image: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
+          display: flex;
+      }
+      .query-data-div2{
+        background-color: #f7b42c;
+        background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+
+      }
+      .query-data-div2 > .container{
+          padding-top: 7px;
+          padding-bottom: 7px;
+      }
+      .query-data-div2 .trip-filter{
+          width: 15%;
+          display: flex;
+      }
+      .query-data-div2 .trip-data{
+          width: 70%;
+      }
+      .query-data-div2 .trip-modify{
+          width: 15%;
+          display: flex;
+      }
+      .query-data-div2 .trip-modify form{
+          margin-top: auto;
+          margin-bottom: auto;
+      }
+      .query-data-div2 .trip-filter button{
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-right: 0;
+          margin-left: auto;
+      }
+      .query-data-div > .container{
+          display: flex;
+          height: 90%;
+          margin-top: auto;
+          margin-bottom: auto;
+          border-radius: 8px;
+      }
+      .query-data-div > .container > div{
+          margin-top: auto;
+          margin-bottom: auto;
+          display: flex;
+      }
+      .trip-places > div{
+          padding-left: 8px !important;
+          padding-right: 8px !important;
+      }
+      .trip-time > div{
+          padding-left: 8px !important;
+          padding-right: 8px !important;
+      }
+      .trip-places{
+          flex: 1;
+          overflow: hidden;
+          min-width: 33%;
+      }
+      .trip-time, .trip-class{
+          padding-left: 10px;
+          padding-right: 10px;
+      }
+      .trip-modify{
+          padding-left: 12px;
+          padding-right: 12px;
+      }
+
+      .spl-btn{
+          transition-duration: .2s;
+          color: white;
+          border-color: white;
+      }
+      .spl-btn2{
+          color: white;
+          padding: 0;
+      }
+      .spl-btn2:hover{
+          color: white!important;
+          background-color: transparent!important;
+      }
+      .spl-btn2:active{
+          background-color: transparent!important;
+          color: white!important;
+      }
+      .spl-btn2:focus{
+          box-shadow: none!important;
+      }
+      /*.trip-modify button:hover, button:active, button:focus{
+          background-color: rgba(220,53,69,.1);
+      }*/
+      .trip-modify button:hover, button:active{
+        background-color: #f7b42c;
+        background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+
+      }
+      .trip-modify button:focus{
+          box-shadow: 0 0 0 0.2rem rgba(255,255,255,.3);
+      }
+
+      @keyframes appear{
+          0%{
+              opacity: 0;
+          }
+          100%{
+              opacity: 1;
+          }
+      }
+    </style>
+
+    <title>Libtech</title>
+  </head>
+  {% endblock headerinclude %} 
+  
+  {% block content %}
+  <body style="overflow: hidden;">
+      <div class="query-data-div">
+        <div class="container">
+            <div class="trip-places">
+                <div class="from-div text-align-left">
+                  {% for seat, seat2 in zipped_data %}
+                    <div class="small-label">Seat Name Category</div>
+                    <div class="white">{{seat2.seat.category}}</div>
+                </div>
+               
+            </div>
+            <div class="v-line"></div>
+            <div class="trip-time">
+                <div class="depart-date-div">
+                    <div class="small-label">Date</div>
+                    <div class="white">{{seat2.date|date:"D, d M Y"}}</div>
+                </div>
+                <div class="return-date-div">
+                    <div class="small-label">Start Time</div>
+                    <div class="white">
+                            {{seat2.start_time}}
+                    </div>
+                </div>
+                <div class="return-date-div">
+                  <div class="small-label">End Time</div>
+                  <div class="white">
+                         {{seat2.end_time}}
+                  </div>
+              </div>
+            </div>
+   
+           
+
+            <div class="v-line"></div>
+           
+            <div class="trip-modify">
+                <!-- <form action="/" method="POST"> -->
+                    <input type="hidden" name="seat" value="{{seat2.seat.category}}">
+                    <input type="hidden" name="date" value='{{seat2.date|date:"D, d M Y"}}'>
+                    <input type="hidden" name="start_time" value='{{seat2.start_time}}'>
+                    <input type="hidden" name="end_time" value="{{seat2.end_time}}">
+                    <a class="btn spl-btn" href="#" type="submit">Modify Reservation</a>
+                <!-- </form> -->
+            </div>  
+        </div>
+    </div>
+   
+    {% endfor %}
+    
+
+     <div class="container-wrapper">
+       <div class="content-wrapper" style="background-color: white;">
+         <div style="height: 100%; width:100%; padding: 20%;">
+          <div style="text-align: center; margin: auto; margin-top: -55%;">
+              <svg width="4em" height="4em" viewBox="0 0 16 16" class="bi bi-exclamation-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+              </svg>
+              <br><br>
+              <h3>Sorry, No Seat Available for this Reservation</h3>
+              <p>
+                This seat category is currently full please pick a new category or a choose a different time instead.
+              </p>
+          </div>
+        </div>
+        </div>
+      </div>
+    
+</body>
+</html>
+{% endblock content %} 

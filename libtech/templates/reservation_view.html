@@ -1,0 +1,256 @@
+{% load static %} 
+{% block headerinclude %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Favicons -->
+    <link href="{% static 'img/logo.png' %}" rel="icon">
+    <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+    <!-- bootstrap css --> 
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"> 
+    <link rel="stylesheet" href="{% static '/css/reservation_view.css' %}">
+
+    <!--MODAL-->
+    <link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css"/>
+    <title>Libtech: Reservations</title> 
+</head>
+  {% endblock headerinclude %} 
+
+  {% block content %}
+  <body>
+    {% include 'base/sidebar.html' %}
+<!--SIDE BAR-->
+<!-- <div class="sidebar">
+  <div class="logo-details">
+    <i class='bx bxl-c-plus-plus icon'></i>
+    <div class="logo_name">LibTechº</div>
+    <i class='bx bx-menu' id="btn" ></i>
+  </div>
+  <ul class="nav-list">
+    <li>
+      <i class='bx bx-search' ></i>
+      <input type="text" placeholder="Search...">
+      <span class="tooltip">Search</span>
+    </li>
+    <li>
+      <a data-scroll-nav="0" href="{% url 'admin-dashboard' %}">
+      <i class='bx bx-grid-alt'></i>
+      <span class="links_name" href="">Dashboard</span>
+      </a>
+      <span class="tooltip">Dashboard</span>
+    </li>
+
+    <li> 
+      <a data-scroll-nav="2" href="#">
+      <i class='bx bx-user-pin' ></i>
+      <span class="links_name">My Reservations</span>
+      </a>
+      <span class="tooltip">reservation</span>
+    </li>
+    <li>
+      <a data-scroll-nav="3" href="{% url 'profile' %}">
+      <i class='bx bx-user' ></i>
+      <span class="links_name">Profile</span>
+      </a>
+      <span class="tooltip">profile</span>
+    </li>
+    <li>
+      <a href="#">
+      <i class='bx bx-chat' ></i>
+      <span class="links_name">360</span>
+      </a>
+      <span class="tooltip">360</span>
+    </li>    
+    <li>
+      <a href="#">
+      <i class='bx bx-cog' ></i>
+      <span class="links_name">Settings</span>
+      </a>
+       <span class="tooltip">Settings</span>
+    </li>
+    <li class="profile">
+      <div class="profile-details">
+        <i class='bx bx-user' ></i>
+        <div class="name_job">
+        <div class="name">{{ user.username }}</div>
+        <div class="job">Administrator</div>
+        </div>
+      </div>
+      <a href="{% url 'logout' %}"><i class='bx bx-log-out' id="log_out" ></i></a>
+    
+    </li>
+  </ul>
+</div>
+END OF SIDE BAR -->
+
+    <!--START OF HOME-SECTION-->
+    <section class="home-section">
+      <!--START OF CONTENT WRAPPER-->
+      <div class="content-wrapper">
+        <!--START OF DATASCROLL INDEX-0-->
+        <div data-scroll-index="0">
+          <!--START OF ROW_1-->
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                  <h3 class="font-weight-bold"><a href="{%url 'admin-dashboard' %}" style="color:black; 
+                    text-decoration: none;">Admin Dashboard</a></h3>
+                  <h6 class="font-weight-normal mb-0">
+                    Hello {{ user.username }} ! what do you want to do?
+                    <span class="text-primary">3 unread alerts!</span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!--END OF ROW_1-->
+
+          {% include 'base/topnav.html' %}
+
+          <!--START OF USER TABLE-->
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title text-center"> Reservations </p>
+                            <table class="table table-striped table-borderless mydatatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Start Time</th>
+                                        <th scope="col">End Time</th>
+                                        <th scope="col">Reserved By</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for reservations in reservations %}
+                                    <tr>
+                                        <td>{{ reservations.room.category }}</td>
+                                        <td>{{ reservations.room.type }}</td>
+                                        <td>{{ reservations.date }}</td>
+                                        <td>{{ reservations.start_time }}</td>
+                                        <td>{{ reservations.end_time }}</td>
+                                        <td>{{ reservations.users.username }}</td>
+                                        <td>
+                                         
+                                          <a href="{% url 'reservation-edit' reservations.id %}" class="btn btn-info btn-sm mr-2" style="background-color: #09d69c;
+                                          border: none;font-weight: 500;color: #fff;"
+                                          >Edit</a>
+                                          <a href="{% url 'reservation-delete' reservations.id %}" class="btn btn-danger btn-sm ml-2" style="background-color: #612C81;
+                                          border: none;font-weight: 500;color: #fff;"
+                                              >Delete</a>
+                                        </td>
+                                    </tr>
+                                  
+                              {% endfor %}
+                          </tbody>
+                          <tfoot>
+                            <th scope="col">Name</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Start Time</th>
+                                        <th scope="col">End Time</th>
+                                        <th scope="col">Reserved By</th>
+                                        <th scope="col"></th>
+                          </tfoot>
+                      </table>
+              
+             
+          </div>
+        </div>
+      </div>  
+      </div>
+          <!--END OF USER TABLE-->
+          
+      <!--END OF CONTENT WRAPPER-->
+      </div>
+    </section>
+    <!--END OF HOME-SECTION-->
+
+      <!-- MODAL DELETE -->
+              <!-- <div class="modal fade" id="exampleModal-{{room.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content" style="background: #2b353b; color:white;">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">DELETE RECORD</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form id="deleteForm" method="POST">
+                    {% csrf_token %} 
+                    <div class="modal-body">
+                      <input type="text" name="rroom-id" value = {{room.id}} hidden>
+                      Are you sure you want to delete {{ item }}?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                        <button type="submit" id="btnDelete" name="btnDelete" class="btn btn-primary" 
+                        style="background-color: #a83332!important; border-color: #a83332!important;">YES</button>
+                    </div>
+                    </form>
+                  </div>
+              </div>
+              </div> -->
+  </body>
+</html>
+
+
+{% endblock content %} 
+{% block footerinclude %}
+<!-- plugins:js -->
+<script src="{% static 'js/vendor.bundle.base.js' %}"></script>
+<!-- Plugin js for this page -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'js/dataTables.select.min.js' %}"></script>
+<!-- End plugin js for this page -->
+<!-- ScrollIt js -->
+<script src="{% static 'js/scrollIt.min.js' %}"></script>
+
+<!-- inject:js -->
+<script src="{% static 'js/off-canvas.js' %}"></script>
+<script src="{% static 'js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'js/template.js' %}"></script>
+<script src="{% static 'js/settings.js' %}"></script>
+<script src="{% static 'js/todolist.js' %}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/admin-dashboard.js' %}"></script>
+<script src="{% static 'js/Chart.roundedBarCharts.js' %}"></script>
+<!-- End custom js for this page-->
+
+<!-- for data table  -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+<script>
+  $('.mydatatable').DataTable({
+    order: [[3, 'desc']],
+    pagingType: 'full_numbers',
+    lengthMenu:[[5,10,25,50,-1],[5,10,25,50,"All"]],
+  });
+</script>
+
+<!-- <script>
+  $('#btn').on('click', function () {
+    $('#exampleModal').modal('show');
+});
+</script> -->
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/boostrap.bundle.min.js"
+integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//E1J19smozuHV6z3Iehds+3U1b9Bn9P1x0x4"
+crossorigin="anonymous"></script> -->
+
+{% endblock footerinclude %}

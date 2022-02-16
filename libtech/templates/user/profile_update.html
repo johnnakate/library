@@ -1,0 +1,158 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% block headerinclude %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Libtech: Profile Update</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicons -->
+    <link href="{% static 'img/logo.png' %}" rel="icon">
+    <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+    
+    <!-- Bootstrap CSS --> 
+    <!-- <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">  -->
+
+    <!-- Bootstrap CSS V2  -->
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+ 
+    <!-- Custom CSS Stylesheet (for your changes) and other dependencies-->
+    <link rel="stylesheet" href="{% static '/css/profile.css' %}">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    
+</head>
+{% endblock headerinclude %}
+{% block content %}
+<body style="background-color: #E4E9F7;">
+  {% include 'base/sidebar.html' %}
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  <!--START OF HOME-SECTION-->
+  <section class="home-section">
+    
+  <!--START OF CONTENT WRAPPER-->
+  <div class="container bootstrap snippets bootdey">
+    <div class="row">  
+      <div class="profile-info col-md-10" style="padding-left: 250px; margin-top: 20px;">
+        <div class="panel">
+          <div class="bio-graph-heading" style="height: 40px; font-size: 25px; font-weight: bold; padding-top: 20px;">
+            Edit Profile Information
+          </div>
+
+         <div class="panel-body bio-graph-info">               
+            <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <!-- {{ u_form|crispy }}
+                        {{ p_form|crispy }} -->
+            
+              <div class="row">
+                  <div class="bio-row">
+                    <img
+                    src="{{ user.profile.image.url }}"alt="User Profile Picture" width="150"/>
+                  </div>
+                  <div class="form-group">
+                    <label class="cols-sm-2 control-label" style="font-size: 12px;">Upload</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">                       
+                            {{ p_form.image }}
+                        </div>
+                    </div>
+                </div>
+              </div>
+            
+              <div class="row">
+                <div class="bio-row">
+                  <p><span>Username </span>{{ u_form.username }}</p>
+                </div>      
+                <div class="bio-row">
+                  <p><span>Email </span>{{ u_form.email }}</p>
+                </div>
+                <div class="bio-row">
+                  <p><span>First Name </span>{{ u_form.first_name }}</p>
+                </div>
+                <div class="bio-row">                                                            
+                  <p><span>Last Name</span> {{ u_form.last_name }}</p>               
+                </div>
+                <div class="bio-row">                                         
+                  <p><span>Address </span>{{ p_form.address }}</p>
+                </div>
+                <div class="bio-row">
+                  <p><span>Account Role </span>{{ p_form.role }}</p>
+                </div>
+                <div class="bio-row">
+                  <p><span>Birthday</span>
+                    <input type="date" class="form-control"> {{ u_form.birthday }} </p>
+                </div>
+                <div class="bio-row">
+                  <p><span>Occupation </span>{{ p_form.occupation }}</p>
+                </div>       
+                <div class="bio-row">
+                  <p><span>Phone </span>{{ p_form.phone }}</p>
+                </div>
+                <div class="bio-row">
+                  <p><span>Bio </span>{{ p_form.bio }}</p>
+                </div>
+                <!-- <div class="bio-row">                  
+                  <p>Picture {{ p_form.image }}</p>
+                </div> -->
+              </div>
+            <!-- </div> -->
+              <br>      
+                  <a class="btn btn-secondary" 
+                    href="{% url 'profile' %}" 
+                    style="margin-left: 260px; background-color: gray; border-color: gray; 
+                    color: honeydew;">Cancel
+                  </a>
+                  <input class="btn btn-info" type="submit" value="Update" 
+                    style="background-color: #ff8c00; border-color: #ff8c00;">
+              </form>               
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--END OF CONTENT WRAPPER--> 
+
+  </section>
+  <!--END OF HOME-SECTION-->
+</body>
+</html>
+{% endblock content %}
+{% block footerinclude %}
+
+<!-- plugins:js -->
+<script src="{% static 'js/vendor.bundle.base.js' %}"></script>
+  
+<!-- Plugin js for this page -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'js/dataTables.select.min.js' %}"></script>
+  
+<!-- End plugin js for this page -->
+<!-- ScrollIt js -->
+<script src="{% static 'js/scrollIt.min.js' %}"></script>
+
+<!-- inject:js -->
+<script src="{% static 'js/off-canvas.js' %}"></script>
+<script src="{% static 'js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'js/template.js' %}"></script>
+<script src="{% static 'js/settings.js' %}"></script>
+<script src="{% static 'js/todolist.js' %}"></script>
+ 
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'js/admin-dashboard.js' %}"></script>
+<script src="{% static 'js/Chart.roundedBarCharts.js' %}"></script>
+<!-- End custom js for this page-->
+{% endblock footerinclude %}
