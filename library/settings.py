@@ -105,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'libtech',
         'USER': 'libtechadmin@libtech',
-        'PASSWORD': 'Catmeow10!',
+        'PASSWORD': '*Qwerty123',
         'HOST': 'libtech.mysql.database.azure.com',
         'PORT': '3306',
         'OPTIONS': {
