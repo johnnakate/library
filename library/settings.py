@@ -1,4 +1,3 @@
-
 """
 Django settings for library project.
 
@@ -11,12 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from distutils import config
 import os
-
-import sqlite3
-
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,21 +20,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-w4s_1s-px!t65k__jg!z3jkq4l(aih&do109d3vzlb!^)(!!tk'
-#SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = False
-
-# SECRET_KEY = config('SECRET_KEY')
-# DEBUG = config('DEBUG', default=False, cast=bool)
-# DATABASES = {'default': dj_database_url.config(default=config('DATABASE_URL'))}
-
+SECRET_KEY = 'django-insecure-w4s_1s-px!t65k__jg!z3jkq4l(aih&do109d3vzlb!^)(!!tk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+DEBUG = True
+
 
 ALLOWED_HOSTS = [os.getenv(
-    'WEBSITE_ ALLOWED'), 'https://2022-libtech-clara.azurewebsites.net', '127.0.0.1']
-
+    'WEBSITE_ ALLOWED'), '2022-libtech-clara.azurewebsites.net', '127.0.0.1']
+# ALLOWED_HOSTS = [
+#     '10.0.2.2',  # for android emulator
+#     '127.0.0.1',
+#     'localhost'
+# ]
 
 # STATICFILES_DIRS = [
 #     "C:/Users/Jane/Desktop/LIBTECH/Django/library/static",
@@ -58,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whitenoise.runserver_nostatic',
+
     'libtech.apps.LibtechConfig',
 
     'user.apps.UserConfig',
@@ -72,6 +64,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     # Add whitenoise middleware after the security middleware                             
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,7 +72,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'library.urls'
@@ -99,7 +91,7 @@ TEMPLATES = [
         },
     },
 ]
-WHITENOISE_USE_FINDERS = True
+
 WSGI_APPLICATION = 'library.wsgi.application'
 
 
@@ -107,55 +99,55 @@ WSGI_APPLICATION = 'library.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 #DATABASES = { 'default': { 'ENGINE': 'django.db.backends.mysql', 'NAME': 'libtech', 'USER': 'root', 'PASSWORD': '', 'HOST': 'localhost', 'PORT': '3306', } }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'd42ibihjpulu15',
-#         'USER': 'gajyyvwjmnmvlo',
-#         'PASSWORD': '5d9a14cf10d847c5369ea02ef0bbc4143b499e3145e866624876f5feeed2ca14',
-#         'HOST': 'ec2-18-206-20-102.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'libtech',
+        'USER': 'libtechadmin@libtech',
+        'PASSWORD': '',
+        'HOST': 'libtech.mysql.database.azure.com',
+        'PORT': '3306',
+    }
+}
+
 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'NAME': 'mydatabase',
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'libtechdb',
-        'USER': 'libtechadmin@libtech-server',
-        'PASSWORD': 'Catmeow10!',
-        'HOST': 'libtech-server.postgres.database.azure.com',
-        'PORT': '5432',
-        'OPTIONS': {'sslmode': 'require'},
-        # 'OPTIONS': {
-        #     'driver': 'ODBC Driver 13 for SQL Server',
-        # },
-    },
-}
+# DATABASES = {
+#     'default': {
+#         'NAME': '***',
+#         'ENGINE': 'sqlserver_ado',
+#         'HOST': '*d**.database.windows.net',
+#         'USER': '***',
+#         'PASSWORD': '***',
+#         'OPTIONS': {
+#             'provider': 'SQLOLEDB',
+#             'use_legacy_date_fields': 'True'
+#         }
+#     }
+# }
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'libtech',
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
+#         'USER': 'claraadmin@claraserver2022',  # server adlimin login name
+#         'PASSWORD': 'Catmeow10!',
+#         'HOST': 'claraserver2022.mysql.database.azure.com',
 #         'PORT': '3306',
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#             'ssl': True
+#         }
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -178,9 +170,6 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
     ]
 }
 
@@ -202,19 +191,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
 STATIC_URL = '/static/'
-WHITENOISE_MANIFEST_STRICT = False
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 MEDIA_URL = '/images/'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_ROOT = (BASE_DIR / 'media')
 
 MEDIA_URL = '/media/'
 
@@ -239,6 +224,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'test.user001000@gmail.com'
 EMAIL_HOST_PASSWORD = 'chaomao123'
-
-
-# Activate Django-Heroku.
