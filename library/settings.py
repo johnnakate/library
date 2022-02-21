@@ -105,11 +105,29 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'libtech',
         'USER': 'libtechadmin@libtech',
-        'PASSWORD': '',
+        'PASSWORD': 'Catmeow10!',
         'HOST': 'libtech.mysql.database.azure.com',
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'ssl': True
+         }
     }
 }
+# DATABASES = {
+#      'default': {
+#          'ENGINE': 'django.db.backends.mysql',
+#          'NAME': 'metroevents',
+#          'USER': 'group4@group4-me'\
+#          'PASSWORD': 'Qwerty123',
+#          'HOST': 'group4-me.mysql.database.azure.com',
+#          'PORT': '3306',
+#           'OPTIONS': {
+#               'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#               'ssl': True
+#           }
+#     }
+# }
 
 
 # DATABASES = {
